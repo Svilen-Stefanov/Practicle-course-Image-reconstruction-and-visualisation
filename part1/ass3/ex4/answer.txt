@@ -1,0 +1,3 @@
+1. How to sort the files in a directory alphabetically?
+I would sort the vector after each call of addChild, in order to guarantee, that the directory is sorted the way it should be.
+This will also ensure, that the for loop in the printInfo method will print the directory in alphabetical order!

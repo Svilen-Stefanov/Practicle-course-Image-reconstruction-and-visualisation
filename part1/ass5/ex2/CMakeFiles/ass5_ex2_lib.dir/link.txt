@@ -1,0 +1,2 @@
+/usr/bin/ar qc libass5_ex2_lib.a  CMakeFiles/ass5_ex2_lib.dir/src/DrawingWidget.cpp.o CMakeFiles/ass5_ex2_lib.dir/src/MainWindow.cpp.o CMakeFiles/ass5_ex2_lib.dir/src/main.cpp.o CMakeFiles/ass5_ex2_lib.dir/ass5_ex2_lib_automoc.cpp.o
+/usr/bin/ranlib libass5_ex2_lib.a

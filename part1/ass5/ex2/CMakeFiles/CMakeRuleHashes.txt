@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+a16498f037b069b34230b332b3c0e8f8 CMakeFiles/ass5_ex2_bin_automoc
+5baf105f88ad29030d669f9d368bdfcc CMakeFiles/ass5_ex2_lib_automoc
+45f3d0eae977ef3259ee1ef9aee1137f qrc_imageFiles.cpp

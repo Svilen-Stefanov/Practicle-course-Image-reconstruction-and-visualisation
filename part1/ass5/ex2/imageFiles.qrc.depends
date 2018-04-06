@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>images/pen.png</file>
+    <file>images/cursor-arrow.png</file>
+    <file>images/color-picker-icon.png</file>
+    <file>images/pick-color-icon.png</file>
+</qresource>
+</RCC>

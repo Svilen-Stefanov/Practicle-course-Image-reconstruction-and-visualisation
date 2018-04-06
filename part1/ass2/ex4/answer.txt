@@ -1,0 +1,11 @@
+1. Why would people want to use such a Rational class?
+The already implemented class double tries to calculate the value of the rational number and round it.
+The result is an approximation of this rational number in the form of X.Y, where X and Y are dot-separated integers.
+Furthermore, double uses a binary representation for the rational number. Since some rational numbers have an infinite representation in binary,
+but the computer memory is limited, you can lose some precision because of rounding.
+
+For some scientific projects, one might need the exact value of a calculation, and not its approximation.
+That is why you may need this class, where the exact value is stored as an object of 2 integers.
+The overloading of the arithmetic operations makes it possible to be more precise when counting with these rational numbers.
+What is more, the overloaded double operator makes the class convenient for cases, where you want to convert it to the already
+existing double type.

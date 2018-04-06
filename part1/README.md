@@ -1,0 +1,1 @@
+Git repository for part 1 of the Praktikum: "Image Reconstruction and Visualization using C++"

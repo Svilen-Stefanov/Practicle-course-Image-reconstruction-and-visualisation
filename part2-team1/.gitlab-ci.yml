@@ -1,0 +1,56 @@
+stages:
+  - build
+
+build_windows:
+  stage: build
+  cache:
+    key: "%CI_BUILD_REF_NAME%"
+    untracked: true
+    paths:
+      - build/
+  tags:
+    - windows
+  script:
+    - IF NOT EXIST "build" mkdir "build"
+    - cd build
+    - cmake -G "Visual Studio 14 2015 Win64" -D EIGEN3_INCLUDE_DIR=%EIGEN3_INCLUDE_DIR% ..
+    - cmake --build .
+    
+build_linux_clang:
+  stage: build
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - build_clang/
+      - testing/
+      - testing_build/
+  tags:
+    - linux
+    - clang
+  script:
+    - mkdir -p "build_clang"
+    - cd build_clang
+    - cmake .. -DCMAKE_CXX_COMPILER=clang++
+    - cmake --build .
+    - rm -rf "build_clang"
+    
+build_linux_g++:
+  stage: build
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - build_g++/
+      - testing/
+      - testing_build/
+  tags:
+    - linux
+    - g++
+  script:
+    - mkdir -p "build_g++"
+    - cd build_g++
+    - cmake .. -DCMAKE_CXX_COMPILER=g++
+    - cmake --build .
+    - rm -rf "build_g++"
+   

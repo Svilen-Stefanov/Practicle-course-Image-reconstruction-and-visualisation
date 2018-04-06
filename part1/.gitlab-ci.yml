@@ -1,0 +1,105 @@
+stages:
+  - build
+  - test
+
+build_windows:
+  stage: build
+  cache:
+    key: "%CI_BUILD_REF_NAME%"
+    untracked: true
+    paths:
+      - build/
+  tags:
+    - windows
+  only: 
+    - master
+  script:
+    - IF NOT EXIST "build" mkdir "build"
+    - cd build
+    - cmake -G "Visual Studio 14 2015 Win64" -D EIGEN3_INCLUDE_DIR=%EIGEN3_INCLUDE_DIR% ..
+    - cmake --build .
+    
+build_linux_clang:
+  stage: build
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - build_clang/
+      - testing/
+      - testing_build/
+  tags:
+    - linux
+    - clang
+  only:
+    - master
+  script:
+    - mkdir -p "build_clang"
+    - cd build_clang
+    - cmake .. -DCMAKE_CXX_COMPILER=clang++
+    - cmake --build .
+    - rm -rf "build_clang"
+    
+build_linux_g++:
+  stage: build
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - build_g++/
+      - testing/
+      - testing_build/
+  tags:
+    - linux
+    - g++
+  only:
+    - master
+  script:
+    - mkdir -p "build_g++"
+    - cd build_g++
+    - cmake .. -DCMAKE_CXX_COMPILER=g++
+    - cmake --build .
+    - rm -rf "build_g++"
+    
+test_windows:
+  stage: test
+  cache:
+    key: "%CI_BUILD_REF_NAME%"
+    untracked: true
+  tags:
+    - windows
+  only:
+    - master
+  script:
+    - IF NOT EXIST "testing" mkdir "testing"
+    - git clone -b ass5 git@gitlab.lrz.de:WS16Cpp/part1-testing.git testing
+    - IF NOT EXIST "testing_build" mkdir "testing_build"
+    - cd testing_build
+    - cmake -D PART1_DIRECTORY=.. -G "Visual Studio 14 2015 Win64" -D EIGEN3_INCLUDE_DIR=%EIGEN3_INCLUDE_DIR% ../testing 
+    - cmake --build .
+    - ctest -V
+    - cd ..
+    - rmdir /S /Q testing
+    
+test_linux:
+  stage: test
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    untracked: true
+    paths:
+      - build_clang/
+      - testing_build/
+  tags:
+    - linux
+  only:
+    - master
+  script:
+    - mkdir -p "testing"
+    - git clone -b ass5 git@gitlab.lrz.de:WS16Cpp/part1-testing.git testing
+    - mkdir -p "testing_build"
+    - cd testing_build
+    - cmake ../testing -DPART1_DIRECTORY=..
+    - cmake --build .
+    - ctest -V
+    - cd ..
+    - rm -rf testing

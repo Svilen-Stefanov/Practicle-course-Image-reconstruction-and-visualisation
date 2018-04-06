@@ -1,0 +1,15 @@
+1. What interesting and unexpected situations did you encounter during your tests?
+
+- The first interesting thing for me was the order of creation of the constructors, because
+I wasn't sure whether the global or the member constructor will be created at first.
+
+- I wasn't also sure where exactly the global and the member destructors will be called,
+but as I supposed, they were deleted at the end of the program.
+
+- During the implementation I have firstly also forgotten that I should create a default
+constructor in order to test the copy constructor.
+
+- It was also interesting to see how exceptions influence the deconstruction of an object.
+If a deletion of an object is attempted in a try block after an exception is thrown, the
+object won't be deleted, which might lead to memory leaks in larger programs, when more objects
+are allocated on the heap.

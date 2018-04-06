@@ -1,0 +1,18 @@
+1.What are the design issues of the previous exercise?
+The problem with the previous implementation of NamePairs (in exercise 2) is
+that the two vectors for Names and for Ages are not connected to each other.
+
+Thus, it could happen that the two vectors are of different sizes. If that is
+the case, a synonymous match can't be done for Names and Ages.
+Therefore methods on such not equally sized vectors won't be able to match pairs properly.
+Furthermore, it doesn't make sense to be able to insert more Ages than Names
+or vice versa.
+
+From the programmers' point of view this will lead to additional exception
+handling, in order to ensure that this vectors have the same size.
+
+2. What can you do to address those issues?
+In order to connect the Names and Ages, I chose a multimap to insert a key-value pair,
+where name is the key and age is its value. Thus it can be guaranteed that every key has a value.
+Furthermore, one doesn't need a sorting method any more, because the class multimap
+sorts automatically its elements (in this case by the alphabetical order of its keys).
